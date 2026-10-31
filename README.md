@@ -30,28 +30,6 @@ o acesso ao banco de dados.
 - Telas Swing no NetBeans.
 - Executável JAR e documentação final.
 
-## Banco de dados
-
-O servidor usa PostgreSQL 18 em `localhost:5432`, com o usuário `postgres`.
-Os bancos `exchange_cripto` e `exchange_cripto_teste` precisam existir antes
-de executar os scripts. Neste ambiente, os dois já foram criados manualmente.
-
-No pgAdmin 4, selecione `exchange_cripto` e abra **Query Tool**. Abra e execute
-o arquivo `sql/01_schema.sql` e depois `sql/02_dados_iniciais.sql`. Atualize
-**Schemas > public > Tables** para visualizar as quatro tabelas.
-
-Os scripts podem ser repetidos e mantêm os saldos e as cotações já existentes.
-Os dois investidores de exemplo são dados fictícios de teste.
-
-Copie `src/main/resources/db.properties.example` para `db.properties` na mesma
-pasta. Preencha sua senha somente no arquivo local. Para os testes, copie
-`src/test/resources/db-test.properties.example` para `db-test.properties`
-na mesma pasta e preencha a senha. Mantenha a URL de teste apontando para
-`exchange_cripto_teste`.
-
-Os arquivos com os exemplos são versionados. `db.properties` e
-`db-test.properties` ficam fora do Git.
-
 ## Testes
 
 Na pasta do projeto, execute `mvn test`.
