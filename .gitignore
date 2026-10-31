@@ -6,3 +6,5 @@ out/
 .tools/
 .DS_Store
 Thumbs.db
+src/main/resources/db.properties
+src/test/resources/db-test.properties
