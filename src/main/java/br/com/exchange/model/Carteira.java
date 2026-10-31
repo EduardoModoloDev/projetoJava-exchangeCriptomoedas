@@ -19,10 +19,20 @@ public class Carteira {
     private final List<Operacao> extrato;
 
     public Carteira() {
-        this.saldoReais = new BigDecimal("0.00");
-        this.saldoBitcoin = new BigDecimal("0.00000000");
-        this.saldoEthereum = new BigDecimal("0.00000000");
-        this.saldoRipple = new BigDecimal("0.00000000");
+        this(BigDecimal.ZERO, BigDecimal.ZERO, BigDecimal.ZERO, BigDecimal.ZERO);
+    }
+
+    /** Carrega os quatro saldos, inclusive quando estão zerados. */
+    public Carteira(BigDecimal saldoReais, BigDecimal saldoBitcoin,
+                    BigDecimal saldoEthereum, BigDecimal saldoRipple) {
+        Validacao.validarValorNaoNegativo(saldoReais, "O saldo em reais");
+        Validacao.validarValorNaoNegativo(saldoBitcoin, "O saldo em Bitcoin");
+        Validacao.validarValorNaoNegativo(saldoEthereum, "O saldo em Ethereum");
+        Validacao.validarValorNaoNegativo(saldoRipple, "O saldo em Ripple");
+        this.saldoReais = saldoReais.setScale(2, RoundingMode.HALF_UP);
+        this.saldoBitcoin = saldoBitcoin.setScale(8, RoundingMode.HALF_UP);
+        this.saldoEthereum = saldoEthereum.setScale(8, RoundingMode.HALF_UP);
+        this.saldoRipple = saldoRipple.setScale(8, RoundingMode.HALF_UP);
         this.extrato = new ArrayList<>();
     }
 
