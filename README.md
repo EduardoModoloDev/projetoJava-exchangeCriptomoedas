@@ -10,7 +10,7 @@ o acesso ao banco de dados e os Controllers com as regras de negócio.
 
 - Java 25
 - Maven
-- PostgreSQL 18 e JDBC (pgJDBC 42.7.14)
+- PostgreSQL 18 e JDBC
 - JUnit 5
 
 ## Funcionalidades implementadas
@@ -30,12 +30,3 @@ o acesso ao banco de dados e os Controllers com as regras de negócio.
 
 - Interface gráfica com Swing no NetBeans, na Parte 4.
 - Executável JAR e documentação final.
-
-## Testes
-
-Na pasta do projeto, execute `mvn test`.
-
-Os testes de integração preparam as tabelas e limpam os dados de
-`exchange_cripto_teste` antes de cada teste. Eles são pulados quando a configuração
-não existe, a senha ainda é a de exemplo ou o banco de teste está inacessível.
-Uma URL apontando para outro banco é recusada.
