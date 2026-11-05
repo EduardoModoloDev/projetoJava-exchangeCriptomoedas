@@ -1,6 +1,7 @@
 package br.com.exchange.util;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 /**
  * Valida CPF, senha e valores.
@@ -29,6 +30,26 @@ public final class Validacao {
         if (valor == null || valor.signum() < 0) {
             throw new IllegalArgumentException(campo + " deve ser informado e não pode ser negativo.");
         }
+    }
+
+    /** Confere o ID antes de usar o tipo INTEGER do banco. */
+    public static int validarInvestidorId(long id) {
+        if (id <= 0 || id > Integer.MAX_VALUE) {
+            throw new IllegalArgumentException("O ID do investidor deve ser válido.");
+        }
+        return (int) id;
+    }
+
+    /** Ajusta o valor em reais para centavos. */
+    public static BigDecimal validarValorPositivo(BigDecimal valor) {
+        if (valor == null || valor.signum() <= 0) {
+            throw new IllegalArgumentException("O valor deve ser maior que zero.");
+        }
+        BigDecimal ajustado = valor.setScale(2, RoundingMode.HALF_UP);
+        if (ajustado.signum() == 0) {
+            throw new IllegalArgumentException("O valor deve ser de pelo menos R$ 0,01 após o arredondamento.");
+        }
+        return ajustado;
     }
 
     private static boolean somenteNumeros(String texto) {

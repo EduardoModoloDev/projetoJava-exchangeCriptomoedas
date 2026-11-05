@@ -7,6 +7,10 @@ import java.math.BigDecimal;
  */
 public interface Tarifacao {
 
+    BigDecimal getAliquotaCompra();
+
+    BigDecimal getAliquotaVenda();
+
     /** Calcula a taxa de compra sobre um valor em reais. */
     BigDecimal calcularTaxaCompra(BigDecimal valor);
 
