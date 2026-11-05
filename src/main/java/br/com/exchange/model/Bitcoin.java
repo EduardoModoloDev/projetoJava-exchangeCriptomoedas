@@ -19,6 +19,16 @@ public class Bitcoin extends Moedas implements Tarifacao {
     }
 
     @Override
+    public BigDecimal getAliquotaCompra() {
+        return ALIQUOTA_COMPRA;
+    }
+
+    @Override
+    public BigDecimal getAliquotaVenda() {
+        return ALIQUOTA_VENDA;
+    }
+
+    @Override
     public BigDecimal calcularTaxaCompra(BigDecimal valor) {
         return calcularTaxa(valor, ALIQUOTA_COMPRA);
     }

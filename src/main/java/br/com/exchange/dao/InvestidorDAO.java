@@ -82,22 +82,39 @@ public class InvestidorDAO {
         try (PreparedStatement comando = conexao.prepareStatement(sql)) {
             comando.setString(1, cpf);
             try (ResultSet resultado = comando.executeQuery()) {
-                if (!resultado.next()) {
-                    return null;
-                }
-                int id = resultado.getInt("id");
-                Carteira carteira = new CarteiraDAO().buscarPorInvestidor(conexao, id);
-                if (carteira == null) {
-                    throw new DaoException("A carteira deste investidor não foi encontrada.");
-                }
-                for (Operacao operacao : new OperacaoDAO().listarPorInvestidor(conexao, id)) {
-                    carteira.adicionarOperacao(operacao);
-                }
-                return new Investidor(id, resultado.getString("nome"), resultado.getString("cpf"),
-                        resultado.getString("senha"), carteira);
+                return carregarInvestidor(conexao, resultado);
             }
         } catch (SQLException e) {
             throw new DaoException("Não foi possível consultar o investidor.", e);
         }
+    }
+
+    /** Consulta pelo ID usando a conexão de quem chamou. */
+    public Investidor buscarPorId(Connection conexao, int id) {
+        String sql = "SELECT id, nome, cpf, senha FROM investidor WHERE id = ?";
+        try (PreparedStatement comando = conexao.prepareStatement(sql)) {
+            comando.setInt(1, id);
+            try (ResultSet resultado = comando.executeQuery()) {
+                return carregarInvestidor(conexao, resultado);
+            }
+        } catch (SQLException e) {
+            throw new DaoException("Não foi possível consultar o investidor.", e);
+        }
+    }
+
+    private Investidor carregarInvestidor(Connection conexao, ResultSet resultado) throws SQLException {
+        if (!resultado.next()) {
+            return null;
+        }
+        int id = resultado.getInt("id");
+        Carteira carteira = new CarteiraDAO().buscarPorInvestidor(conexao, id);
+        if (carteira == null) {
+            throw new DaoException("A carteira deste investidor não foi encontrada.");
+        }
+        for (Operacao operacao : new OperacaoDAO().listarPorInvestidor(conexao, id)) {
+            carteira.adicionarOperacao(operacao);
+        }
+        return new Investidor(id, resultado.getString("nome"), resultado.getString("cpf"),
+                resultado.getString("senha"), carteira);
     }
 }

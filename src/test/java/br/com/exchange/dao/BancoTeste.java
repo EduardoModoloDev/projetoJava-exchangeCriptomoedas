@@ -15,7 +15,7 @@ import java.util.Properties;
 import org.junit.jupiter.api.Assumptions;
 
 /** Configuração e limpeza somente do banco de testes. */
-final class BancoTeste {
+public final class BancoTeste {
 
     private BancoTeste() {
     }
@@ -32,7 +32,7 @@ final class BancoTeste {
         }
     }
 
-    static Connection abrirConexao() {
+    public static Connection abrirConexao() {
         Properties configuracao = new Properties();
         try (InputStream arquivo = BancoTeste.class.getClassLoader()
                 .getResourceAsStream("db-test.properties")) {
@@ -76,7 +76,7 @@ final class BancoTeste {
         }
     }
 
-    static void preparar(Connection conexao) throws SQLException, IOException {
+    public static void preparar(Connection conexao) throws SQLException, IOException {
         // Confere o banco real antes de executar qualquer SQL de limpeza.
         if (!"exchange_cripto_teste".equals(conexao.getCatalog())) {
             throw new IllegalStateException("Limpeza permitida somente em exchange_cripto_teste.");
