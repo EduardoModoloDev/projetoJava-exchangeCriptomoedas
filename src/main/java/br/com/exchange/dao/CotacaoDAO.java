@@ -24,7 +24,19 @@ public class CotacaoDAO {
     }
 
     public List<Moedas> buscarTodas(Connection conexao) {
+        return buscar(conexao, false);
+    }
+
+    /** Mantém as três cotações reservadas até o fim da atualização. */
+    public List<Moedas> buscarParaAtualizar(Connection conexao) {
+        return buscar(conexao, true);
+    }
+
+    private List<Moedas> buscar(Connection conexao, boolean bloquear) {
         String sql = "SELECT moeda, valor FROM cotacao ORDER BY moeda";
+        if (bloquear) {
+            sql += " FOR UPDATE";
+        }
         List<Moedas> moedas = new ArrayList<>();
         try (PreparedStatement comando = conexao.prepareStatement(sql);
              ResultSet resultado = comando.executeQuery()) {

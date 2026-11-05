@@ -19,8 +19,20 @@ public class CarteiraDAO {
 
     /** Retorna null quando o investidor não tem carteira. */
     public Carteira buscarPorInvestidor(Connection conexao, int investidorId) {
+        return buscar(conexao, investidorId, false);
+    }
+
+    /** Evita duas movimentações alterarem o mesmo saldo ao mesmo tempo. */
+    public Carteira buscarParaAtualizar(Connection conexao, int investidorId) {
+        return buscar(conexao, investidorId, true);
+    }
+
+    private Carteira buscar(Connection conexao, int investidorId, boolean bloquear) {
         String sql = "SELECT saldo_real, saldo_bitcoin, saldo_ethereum, saldo_ripple "
                 + "FROM carteira WHERE investidor_id = ?";
+        if (bloquear) {
+            sql += " FOR UPDATE";
+        }
         try (PreparedStatement comando = conexao.prepareStatement(sql)) {
             comando.setInt(1, investidorId);
             try (ResultSet resultado = comando.executeQuery()) {
