@@ -1,3 +1,3 @@
 url=jdbc:postgresql://localhost:5432/exchange_cripto_teste
 usuario=postgres
-senha=TROQUE_PELA_SUA_SENHA
+senha=exemploSenha
