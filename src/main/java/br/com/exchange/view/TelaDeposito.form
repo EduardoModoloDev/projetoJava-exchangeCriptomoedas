@@ -28,8 +28,8 @@
               <EmptySpace min="-2" pref="116" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="lblValor" min="-2" pref="335" max="-2" attributes="0"/>
-                  <Component id="txtValor" alignment="0" min="-2" pref="200" max="-2" attributes="0"/>
                   <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                      <Component id="txtValor" alignment="0" max="32767" attributes="0"/>
                       <Component id="btnFechar" alignment="0" max="32767" attributes="0"/>
                       <Component id="btnDepositar" alignment="0" pref="174" max="32767" attributes="0"/>
                   </Group>
@@ -44,12 +44,12 @@
               <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
               <Component id="lblValor" min="-2" pref="57" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="txtValor" min="-2" pref="64" max="-2" attributes="0"/>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Component id="txtValor" min="-2" pref="37" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Component id="btnDepositar" min="-2" pref="35" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="btnFechar" min="-2" pref="35" max="-2" attributes="0"/>
-              <EmptySpace pref="237" max="32767" attributes="0"/>
+              <EmptySpace pref="270" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>

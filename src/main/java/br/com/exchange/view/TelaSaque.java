@@ -16,10 +16,11 @@ public class TelaSaque extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(TelaSaque.class.getName());
 
-    /**
-     * Creates new form TelaSaque
-     */
-    public TelaSaque() {
+    private final long investidorId;
+    private final InvestidorController controller = new InvestidorController();
+
+    public TelaSaque(long investidorId) {
+        this.investidorId = investidorId;
         initComponents();
     }
 
@@ -41,7 +42,7 @@ public class TelaSaque extends javax.swing.JFrame {
         setTitle("Sacar");
 
         lblValor.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
-        lblValor.setText("Valor em Reais:");
+        lblValor.setText("Valor em Reais");
 
         btnSacar.setText("Sacar");
         btnSacar.addActionListener(this::btnSacarActionPerformed);
@@ -81,37 +82,33 @@ public class TelaSaque extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSacarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSacarActionPerformed
-        // TODO add your handling code here:
+            try {
+        String texto = txtValor.getText().trim().replace(',', '.');
+        BigDecimal valor = new BigDecimal(texto);
+
+        // O controller verifica se há saldo suficiente.
+        Carteira carteira = controller.sacar(investidorId, valor);
+
+        String mensagem = "Saque realizado."
+                + "\nReais: R$ " + carteira.getSaldoReais().toPlainString()
+                + "\nBitcoin: " + carteira.getSaldoBitcoin().toPlainString()
+                + "\nEthereum: " + carteira.getSaldoEthereum().toPlainString()
+                + "\nRipple: " + carteira.getSaldoRipple().toPlainString();
+
+        JOptionPane.showMessageDialog(this, mensagem);
+        dispose();
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(this, "Valor inválido");
+    } catch (IllegalArgumentException e) {
+        JOptionPane.showMessageDialog(this, e.getMessage());
+    }
     }//GEN-LAST:event_btnSacarActionPerformed
 
     private void btnFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFecharActionPerformed
-        // TODO add your handling code here:
+        dispose();
     }//GEN-LAST:event_btnFecharActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
-            logger.log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new TelaSaque().setVisible(true));
-    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnFechar;
