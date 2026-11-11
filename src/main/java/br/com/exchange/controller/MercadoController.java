@@ -25,11 +25,18 @@ public class MercadoController {
     private final CarteiraDAO carteiras = new CarteiraDAO();
     private final OperacaoDAO operacoes = new OperacaoDAO();
 
+    /**
+     * Cria o controller com a conexão padrão do projeto.
+     */
     public MercadoController() {
         this(ConnectionFactory::getConnection);
     }
 
-    /** Permite abrir conexões com o banco de testes. */
+    /**
+     * Permite abrir conexões com o banco de testes.
+     *
+     * @param conexoes função que abre as conexões usadas pelo controller
+     */
     public MercadoController(Supplier<Connection> conexoes) {
         if (conexoes == null) {
             throw new IllegalArgumentException("Informe como abrir a conexão com o banco.");
@@ -37,7 +44,11 @@ public class MercadoController {
         this.conexoes = conexoes;
     }
 
-    /** Consulta as cotações atuais de BTC, ETH e XRP. */
+    /**
+     * Consulta as cotações atuais de BTC, ETH e XRP.
+     *
+     * @return cotações atuais das três criptomoedas
+     */
     public List<Moedas> consultarCotacoes() {
         try (Connection conexao = conexoes.get()) {
             List<Moedas> moedas = cotacoes.buscarTodas(conexao);
@@ -48,7 +59,11 @@ public class MercadoController {
         }
     }
 
-    /** Varia cada cotação entre -5% e +5% e salva as três juntas. */
+    /**
+     * Varia cada cotação entre -5% e +5% e salva as três juntas.
+     *
+     * @return novas cotações salvas no banco
+     */
     public List<Moedas> atualizarCotacoes() {
         try (Connection conexao = conexoes.get()) {
             conexao.setAutoCommit(false);
@@ -73,6 +88,11 @@ public class MercadoController {
     /**
      * Compra a moeda e devolve a carteira atualizada.
      * A tela chama InvestidorController.validarSenha() e consultarCotacoes() antes.
+     *
+     * @param investidorId ID do investidor
+     * @param siglaMoeda sigla da criptomoeda
+     * @param valorEmReais valor da negociação em reais, antes da taxa
+     * @return carteira atualizada
      */
     public Carteira comprar(long investidorId, String siglaMoeda, BigDecimal valorEmReais) {
         return negociar(investidorId, siglaMoeda, valorEmReais, true);
@@ -81,6 +101,11 @@ public class MercadoController {
     /**
      * Vende a moeda pelo valor em reais e devolve a carteira atualizada.
      * A tela chama InvestidorController.validarSenha() e consultarCotacoes() antes.
+     *
+     * @param investidorId ID do investidor
+     * @param siglaMoeda sigla da criptomoeda
+     * @param valorEmReais valor da negociação em reais, antes da taxa
+     * @return carteira atualizada
      */
     public Carteira vender(long investidorId, String siglaMoeda, BigDecimal valorEmReais) {
         return negociar(investidorId, siglaMoeda, valorEmReais, false);

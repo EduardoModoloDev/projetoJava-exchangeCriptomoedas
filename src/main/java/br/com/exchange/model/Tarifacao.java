@@ -7,13 +7,29 @@ import java.math.BigDecimal;
  */
 public interface Tarifacao {
 
+    /**
+     * Consulta a alíquota de compra.
+     * @return alíquota decimal da compra
+     */
     BigDecimal getAliquotaCompra();
 
+    /**
+     * Consulta a alíquota de venda.
+     * @return alíquota decimal da venda
+     */
     BigDecimal getAliquotaVenda();
 
-    /** Calcula a taxa de compra sobre um valor em reais. */
+    /**
+     * Calcula a taxa de compra em reais.
+     * @param valor valor da operação em reais
+     * @return valor da taxa em reais
+     */
     BigDecimal calcularTaxaCompra(BigDecimal valor);
 
-    /** Calcula a taxa de venda sobre um valor em reais. */
+    /**
+     * Calcula a taxa de venda em reais.
+     * @param valor valor da operação em reais
+     * @return valor da taxa em reais
+     */
     BigDecimal calcularTaxaVenda(BigDecimal valor);
 }
