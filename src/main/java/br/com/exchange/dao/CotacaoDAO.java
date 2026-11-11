@@ -15,6 +15,17 @@ import java.util.List;
 /** Consulta e salva as cotações das criptomoedas. */
 public class CotacaoDAO {
 
+    /**
+     * Cria o acesso aos dados.
+     */
+    public CotacaoDAO() {
+    }
+
+    /**
+     * Consulta as cotações das três criptomoedas.
+     *
+     * @return cotações de BTC, ETH e XRP
+     */
     public List<Moedas> buscarTodas() {
         try (Connection conexao = ConnectionFactory.getConnection()) {
             return buscarTodas(conexao);
@@ -23,11 +34,22 @@ public class CotacaoDAO {
         }
     }
 
+    /**
+     * Consulta as cotações das três criptomoedas.
+     *
+     * @param conexao conexão controlada por quem chamou o método
+     * @return cotações de BTC, ETH e XRP
+     */
     public List<Moedas> buscarTodas(Connection conexao) {
         return buscar(conexao, false);
     }
 
-    /** Mantém as três cotações reservadas até o fim da atualização. */
+    /**
+     * Mantém as três cotações reservadas até o fim da atualização.
+     *
+     * @param conexao conexão controlada por quem chamou o método
+     * @return cotações bloqueadas até o fim da transação
+     */
     public List<Moedas> buscarParaAtualizar(Connection conexao) {
         return buscar(conexao, true);
     }
@@ -57,6 +79,12 @@ public class CotacaoDAO {
         }
     }
 
+    /**
+     * Salva a cotação informada.
+     *
+     * @param sigla sigla da moeda
+     * @param novoValor nova cotação em reais
+     */
     public void atualizar(String sigla, BigDecimal novoValor) {
         try (Connection conexao = ConnectionFactory.getConnection()) {
             atualizar(conexao, sigla, novoValor);
@@ -65,7 +93,13 @@ public class CotacaoDAO {
         }
     }
 
-    /** Salva o valor recebido, sem calcular variação ou taxas. */
+    /**
+     * Salva o valor recebido, sem calcular variação ou taxas.
+     *
+     * @param conexao conexão controlada por quem chamou o método
+     * @param sigla sigla da moeda
+     * @param novoValor nova cotação em reais
+     */
     public void atualizar(Connection conexao, String sigla, BigDecimal novoValor) {
         String sql = "UPDATE cotacao SET valor = ? WHERE moeda = ?";
         try (PreparedStatement comando = conexao.prepareStatement(sql)) {

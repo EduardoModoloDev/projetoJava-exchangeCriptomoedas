@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html","k":"18"},{"l":"br.com.exchange.controller"},{"l":"br.com.exchange.dao"},{"l":"br.com.exchange.model"},{"l":"br.com.exchange.util"},{"l":"br.com.exchange.view"}];updateSearchResults();

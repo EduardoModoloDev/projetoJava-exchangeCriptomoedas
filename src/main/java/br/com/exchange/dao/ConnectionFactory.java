@@ -1,9 +1,11 @@
 package br.com.exchange.dao;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.Reader;
+import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -15,14 +17,16 @@ public final class ConnectionFactory {
     private ConnectionFactory() {
     }
 
+    /**
+     * Abre a conexão usando a configuração externa ou a configuração local do NetBeans.
+     *
+     * @return conexão aberta com o PostgreSQL
+     */
     public static Connection getConnection() {
         Properties configuracao = new Properties();
-        try (InputStream arquivo = ConnectionFactory.class.getClassLoader()
-                .getResourceAsStream("db.properties")) {
-            if (arquivo == null) {
-                throw new DaoException("Crie src/main/resources/db.properties a partir do exemplo.");
-            }
-            configuracao.load(new InputStreamReader(arquivo, StandardCharsets.UTF_8));
+        Path caminho = localizarConfiguracao();
+        try (Reader arquivo = Files.newBufferedReader(caminho, StandardCharsets.UTF_8)) {
+            configuracao.load(arquivo);
         } catch (IOException e) {
             throw new DaoException("Não foi possível ler db.properties.", e);
         }
@@ -44,5 +48,23 @@ public final class ConnectionFactory {
         } catch (SQLException e) {
             throw new DaoException("Confira se o PostgreSQL está rodando e se os dados de db.properties estão corretos.", e);
         }
+    }
+
+    private static Path localizarConfiguracao() {
+        Path externo = Path.of("db.properties");
+        if (Files.isRegularFile(externo)) {
+            return externo;
+        }
+
+        // No NetBeans, as classes ficam em pastas, fora do JAR.
+        URL classe = ConnectionFactory.class.getResource("ConnectionFactory.class");
+        if (classe != null && classe.getProtocol().equals("file")) {
+            Path local = Path.of("src", "main", "resources", "db.properties");
+            if (Files.isRegularFile(local)) {
+                return local;
+            }
+        }
+        throw new DaoException("Crie db.properties na pasta de execução, ao lado do JAR, "
+                + "copiando db.properties.example. No NetBeans, ele também pode ficar em src/main/resources/db.properties.");
     }
 }

@@ -24,11 +24,18 @@ public class InvestidorController {
     private final CarteiraDAO carteiras = new CarteiraDAO();
     private final OperacaoDAO operacoes = new OperacaoDAO();
 
+    /**
+     * Cria o controller com a conexão padrão do projeto.
+     */
     public InvestidorController() {
         this(ConnectionFactory::getConnection);
     }
 
-    /** Permite abrir conexões com o banco de testes. */
+    /**
+     * Permite abrir conexões com o banco de testes.
+     *
+     * @param conexoes função que abre as conexões usadas pelo controller
+     */
     public InvestidorController(Supplier<Connection> conexoes) {
         if (conexoes == null) {
             throw new IllegalArgumentException("Informe como abrir a conexão com o banco.");
@@ -36,7 +43,13 @@ public class InvestidorController {
         this.conexoes = conexoes;
     }
 
-    /** Devolve o investidor quando o CPF e a senha conferem. */
+    /**
+     * Devolve o investidor quando o CPF e a senha conferem.
+     *
+     * @param cpf CPF com 11 dígitos, sem pontuação
+     * @param senha senha com seis dígitos numéricos
+     * @return investidor autenticado
+     */
     public Investidor autenticar(String cpf, String senha) {
         Validacao.validarCpf(cpf);
         Validacao.validarSenha(senha);
@@ -51,27 +64,56 @@ public class InvestidorController {
         }
     }
 
-    /** Lança Senha inválida quando a confirmação não confere. */
+    /**
+     * Lança Senha inválida quando a confirmação não confere.
+     *
+     * @param investidorId ID do investidor
+     * @param senha senha com seis dígitos numéricos
+     */
     public void validarSenha(long investidorId, String senha) {
         buscarComSenha(investidorId, senha);
     }
 
-    /** Devolve nome, CPF e carteira com os saldos atuais do banco. */
+    /**
+     * Devolve nome, CPF e carteira com os saldos atuais do banco.
+     *
+     * @param investidorId ID do investidor
+     * @param senha senha com seis dígitos numéricos
+     * @return investidor com nome, CPF e saldos atuais
+     */
     public Investidor consultarSaldo(long investidorId, String senha) {
         return buscarComSenha(investidorId, senha);
     }
 
-    /** Confirma a senha e devolve as operações em ordem de data. */
+    /**
+     * Confirma a senha e devolve as operações em ordem de data.
+     *
+     * @param investidorId ID do investidor
+     * @param senha senha com seis dígitos numéricos
+     * @return operações em ordem de data
+     */
     public List<Operacao> consultarExtrato(long investidorId, String senha) {
         return buscarComSenha(investidorId, senha).getCarteira().getExtrato();
     }
 
-    /** Deposita reais e devolve a carteira atualizada. */
+    /**
+     * Deposita reais e devolve a carteira atualizada.
+     *
+     * @param investidorId ID do investidor
+     * @param valor valor em reais ou unidades da moeda indicada
+     * @return carteira atualizada
+     */
     public Carteira depositar(long investidorId, BigDecimal valor) {
         return movimentarReais(investidorId, valor, true);
     }
 
-    /** Saca reais se houver saldo e devolve a carteira atualizada. */
+    /**
+     * Saca reais se houver saldo e devolve a carteira atualizada.
+     *
+     * @param investidorId ID do investidor
+     * @param valor valor em reais ou unidades da moeda indicada
+     * @return carteira atualizada
+     */
     public Carteira sacar(long investidorId, BigDecimal valor) {
         return movimentarReais(investidorId, valor, false);
     }

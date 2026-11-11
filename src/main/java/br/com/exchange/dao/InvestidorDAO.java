@@ -12,7 +12,18 @@ import java.sql.Statement;
 /** Salva e consulta os dados do investidor. */
 public class InvestidorDAO {
 
-    /** Salva o investidor e sua carteira juntos e retorna o ID criado. */
+    /**
+     * Cria o acesso aos dados.
+     */
+    public InvestidorDAO() {
+    }
+
+    /**
+     * Salva o investidor e sua carteira juntos e retorna o ID criado.
+     *
+     * @param investidor investidor a salvar
+     * @return ID criado pelo banco
+     */
     public int inserir(Investidor investidor) {
         try (Connection conexao = ConnectionFactory.getConnection()) {
             conexao.setAutoCommit(false);
@@ -33,7 +44,13 @@ public class InvestidorDAO {
         }
     }
 
-    /** Quem fornece a conexão controla o commit e o rollback. */
+    /**
+     * Quem fornece a conexão controla o commit e o rollback.
+     *
+     * @param conexao conexão controlada por quem chamou o método
+     * @param investidor investidor a salvar
+     * @return ID criado pelo banco
+     */
     public int inserir(Connection conexao, Investidor investidor) {
         String sql = "INSERT INTO investidor (nome, cpf, senha) VALUES (?, ?, ?)";
         try (PreparedStatement comando = conexao.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
@@ -68,6 +85,12 @@ public class InvestidorDAO {
         }
     }
 
+    /**
+     * Consulta o investidor pelo CPF.
+     *
+     * @param cpf CPF com 11 dígitos, sem pontuação
+     * @return investidor completo, ou null se não existir
+     */
     public Investidor buscarPorCpf(String cpf) {
         try (Connection conexao = ConnectionFactory.getConnection()) {
             return buscarPorCpf(conexao, cpf);
@@ -76,7 +99,13 @@ public class InvestidorDAO {
         }
     }
 
-    /** Carrega também os saldos e o extrato. Retorna null se o CPF não existir. */
+    /**
+     * Carrega também os saldos e o extrato. Retorna null se o CPF não existir.
+     *
+     * @param conexao conexão controlada por quem chamou o método
+     * @param cpf CPF com 11 dígitos, sem pontuação
+     * @return investidor completo, ou null se não existir
+     */
     public Investidor buscarPorCpf(Connection conexao, String cpf) {
         String sql = "SELECT id, nome, cpf, senha FROM investidor WHERE cpf = ?";
         try (PreparedStatement comando = conexao.prepareStatement(sql)) {
@@ -89,7 +118,13 @@ public class InvestidorDAO {
         }
     }
 
-    /** Consulta pelo ID usando a conexão de quem chamou. */
+    /**
+     * Consulta pelo ID usando a conexão de quem chamou.
+     *
+     * @param conexao conexão controlada por quem chamou o método
+     * @param id ID do investidor
+     * @return investidor completo, ou null se não existir
+     */
     public Investidor buscarPorId(Connection conexao, int id) {
         String sql = "SELECT id, nome, cpf, senha FROM investidor WHERE id = ?";
         try (PreparedStatement comando = conexao.prepareStatement(sql)) {

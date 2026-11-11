@@ -18,11 +18,21 @@ public class Carteira {
     private BigDecimal saldoRipple;
     private final List<Operacao> extrato;
 
+    /**
+     * Cria uma carteira com os saldos zerados.
+     */
     public Carteira() {
         this(BigDecimal.ZERO, BigDecimal.ZERO, BigDecimal.ZERO, BigDecimal.ZERO);
     }
 
-    /** Carrega os quatro saldos, inclusive quando estão zerados. */
+    /**
+     * Carrega os quatro saldos, inclusive quando estão zerados.
+     *
+     * @param saldoReais saldo em reais
+     * @param saldoBitcoin saldo em Bitcoin
+     * @param saldoEthereum saldo em Ethereum
+     * @param saldoRipple saldo em Ripple
+     */
     public Carteira(BigDecimal saldoReais, BigDecimal saldoBitcoin,
                     BigDecimal saldoEthereum, BigDecimal saldoRipple) {
         Validacao.validarValorNaoNegativo(saldoReais, "O saldo em reais");
@@ -36,23 +46,48 @@ public class Carteira {
         this.extrato = new ArrayList<>();
     }
 
+    /**
+     * Consulta o saldo em reais.
+     *
+     * @return saldo em reais com duas casas decimais
+     */
     public BigDecimal getSaldoReais() {
         return saldoReais;
     }
 
+    /**
+     * Consulta o saldo em Bitcoin.
+     *
+     * @return saldo em Bitcoin com oito casas decimais
+     */
     public BigDecimal getSaldoBitcoin() {
         return saldoBitcoin;
     }
 
+    /**
+     * Consulta o saldo em Ethereum.
+     *
+     * @return saldo em Ethereum com oito casas decimais
+     */
     public BigDecimal getSaldoEthereum() {
         return saldoEthereum;
     }
 
+    /**
+     * Consulta o saldo em Ripple.
+     *
+     * @return saldo em Ripple com oito casas decimais
+     */
     public BigDecimal getSaldoRipple() {
         return saldoRipple;
     }
 
-    /** Aceita as siglas REAL, BTC, ETH e XRP. */
+    /**
+     * Aceita as siglas REAL, BTC, ETH e XRP.
+     *
+     * @param sigla sigla da moeda
+     * @return saldo da moeda informada
+     */
     public BigDecimal obterSaldo(String sigla) {
         if (sigla == null) {
             throw new IllegalArgumentException("A sigla da moeda deve ser informada.");
@@ -70,14 +105,24 @@ public class Carteira {
         }
     }
 
-    /** Adiciona saldo. O registro no extrato é feito separadamente. */
+    /**
+     * Adiciona saldo. O registro no extrato é feito separadamente.
+     *
+     * @param sigla sigla da moeda
+     * @param valor valor em reais ou unidades da moeda indicada
+     */
     public void adicionarSaldo(String sigla, BigDecimal valor) {
         BigDecimal saldoAtual = obterSaldo(sigla);
         BigDecimal valorAjustado = ajustarValor(sigla, valor);
         alterarSaldo(sigla, saldoAtual.add(valorAjustado));
     }
 
-    /** Retira saldo se houver valor suficiente. */
+    /**
+     * Retira saldo se houver valor suficiente.
+     *
+     * @param sigla sigla da moeda
+     * @param valor valor em reais ou unidades da moeda indicada
+     */
     public void removerSaldo(String sigla, BigDecimal valor) {
         BigDecimal saldoAtual = obterSaldo(sigla);
         BigDecimal valorAjustado = ajustarValor(sigla, valor);
@@ -87,6 +132,11 @@ public class Carteira {
         alterarSaldo(sigla, saldoAtual.subtract(valorAjustado));
     }
 
+    /**
+     * Acrescenta uma operação ao extrato em memória.
+     *
+     * @param operacao operação a registrar no extrato
+     */
     public void adicionarOperacao(Operacao operacao) {
         if (operacao == null) {
             throw new IllegalArgumentException("A operação deve ser informada.");
@@ -94,7 +144,11 @@ public class Carteira {
         extrato.add(operacao);
     }
 
-    /** Devolve uma cópia do extrato que não pode ser alterada. */
+    /**
+     * Devolve uma cópia do extrato que não pode ser alterada.
+     *
+     * @return cópia do extrato que não pode ser alterada
+     */
     public List<Operacao> getExtrato() {
         List<Operacao> copia = new ArrayList<>(extrato);
         return Collections.unmodifiableList(copia);

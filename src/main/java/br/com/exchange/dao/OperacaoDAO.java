@@ -14,6 +14,19 @@ import java.util.List;
 /** Salva e consulta as operações do extrato. */
 public class OperacaoDAO {
 
+    /**
+     * Cria o acesso aos dados.
+     */
+    public OperacaoDAO() {
+    }
+
+    /**
+     * Registra os dados no banco.
+     *
+     * @param operacao operação a registrar no extrato
+     * @param investidorId ID do investidor
+     * @return ID criado pelo banco
+     */
     public int inserir(Operacao operacao, int investidorId) {
         try (Connection conexao = ConnectionFactory.getConnection()) {
             return inserir(conexao, operacao, investidorId);
@@ -22,7 +35,14 @@ public class OperacaoDAO {
         }
     }
 
-    /** Não fecha nem confirma a conexão recebida. */
+    /**
+     * Não fecha nem confirma a conexão recebida.
+     *
+     * @param conexao conexão controlada por quem chamou o método
+     * @param operacao operação a registrar no extrato
+     * @param investidorId ID do investidor
+     * @return ID criado pelo banco
+     */
     public int inserir(Connection conexao, Operacao operacao, int investidorId) {
         String sql = "INSERT INTO operacao (investidor_id, data_hora, sinal, valor, moeda, "
                 + "cotacao, taxa, saldo_real, saldo_btc, saldo_eth, saldo_xrp) "
@@ -51,6 +71,12 @@ public class OperacaoDAO {
         }
     }
 
+    /**
+     * Consulta o extrato em ordem de data e ID.
+     *
+     * @param investidorId ID do investidor
+     * @return operações em ordem de data e ID
+     */
     public List<Operacao> listarPorInvestidor(int investidorId) {
         try (Connection conexao = ConnectionFactory.getConnection()) {
             return listarPorInvestidor(conexao, investidorId);
@@ -59,6 +85,13 @@ public class OperacaoDAO {
         }
     }
 
+    /**
+     * Consulta o extrato em ordem de data e ID.
+     *
+     * @param conexao conexão controlada por quem chamou o método
+     * @param investidorId ID do investidor
+     * @return operações em ordem de data e ID
+     */
     public List<Operacao> listarPorInvestidor(Connection conexao, int investidorId) {
         String sql = "SELECT data_hora, sinal, valor, moeda, cotacao, taxa, "
                 + "saldo_real, saldo_btc, saldo_eth, saldo_xrp FROM operacao "

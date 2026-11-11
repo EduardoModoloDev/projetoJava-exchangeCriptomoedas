@@ -27,6 +27,14 @@ public final class Operacao {
     /**
      * Guarda os saldos da carteira após a operação.
      * O valor é em reais. A taxa é decimal: 0.01 = 1%.
+     *
+     * @param dataHora data e hora da operação
+     * @param sinal sinal de entrada ou saída de reais, + ou -
+     * @param valor valor em reais ou unidades da moeda indicada
+     * @param siglaMoeda sigla da criptomoeda
+     * @param cotacao cotação da moeda em reais
+     * @param taxa taxa decimal aplicada
+     * @param carteira carteira com os saldos atuais
      */
     public Operacao(LocalDateTime dataHora, char sinal, BigDecimal valor,
                     String siglaMoeda, BigDecimal cotacao, BigDecimal taxa, Carteira carteira) {
@@ -59,46 +67,101 @@ public final class Operacao {
         this.saldoRipple = carteira.getSaldoRipple();
     }
 
+    /**
+     * Consulta a data e a hora da operação.
+     *
+     * @return data e hora registradas
+     */
     public LocalDateTime getDataHora() {
         return dataHora;
     }
 
+    /**
+     * Consulta o sinal da operação.
+     *
+     * @return sinal registrado, + ou -
+     */
     public char getSinal() {
         return sinal;
     }
 
+    /**
+     * Consulta o valor da operação em reais.
+     *
+     * @return valor em reais antes da taxa
+     */
     public BigDecimal getValor() {
         return valor;
     }
 
+    /**
+     * Consulta a moeda da operação.
+     *
+     * @return sigla da moeda da operação
+     */
     public String getSiglaMoeda() {
         return siglaMoeda;
     }
 
+    /**
+     * Consulta a cotação em reais.
+     *
+     * @return cotação em reais com duas casas decimais
+     */
     public BigDecimal getCotacao() {
         return cotacao;
     }
 
+    /**
+     * Consulta a taxa decimal da operação.
+     *
+     * @return alíquota decimal registrada
+     */
     public BigDecimal getTaxa() {
         return taxa;
     }
 
+    /**
+     * Consulta o saldo em reais.
+     *
+     * @return saldo em reais com duas casas decimais
+     */
     public BigDecimal getSaldoReais() {
         return saldoReais;
     }
 
+    /**
+     * Consulta o saldo em Bitcoin.
+     *
+     * @return saldo em Bitcoin com oito casas decimais
+     */
     public BigDecimal getSaldoBitcoin() {
         return saldoBitcoin;
     }
 
+    /**
+     * Consulta o saldo em Ethereum.
+     *
+     * @return saldo em Ethereum com oito casas decimais
+     */
     public BigDecimal getSaldoEthereum() {
         return saldoEthereum;
     }
 
+    /**
+     * Consulta o saldo em Ripple.
+     *
+     * @return saldo em Ripple com oito casas decimais
+     */
     public BigDecimal getSaldoRipple() {
         return saldoRipple;
     }
 
+    /**
+     * Formata os dados da operação em uma linha do extrato.
+     *
+     * @return linha formatada do extrato
+     */
     @Override
     public String toString() {
         return dataHora.format(FORMATO_DATA) + " " + sinal + " " + valor.toPlainString()
