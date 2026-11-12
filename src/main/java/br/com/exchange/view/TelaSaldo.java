@@ -10,7 +10,7 @@ import br.com.exchange.model.Investidor;
 import javax.swing.JOptionPane;
 /**
  *
- * @author edumo
+ * author edumo
  */
 public class TelaSaldo extends javax.swing.JFrame {
     

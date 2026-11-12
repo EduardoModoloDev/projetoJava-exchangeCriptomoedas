@@ -9,7 +9,7 @@ import br.com.exchange.model.Investidor;
 import javax.swing.JOptionPane;
 /**
  *
- * @author edumo
+ * author edumo
  */
 public class TelaLogin extends javax.swing.JFrame {
     
@@ -97,7 +97,7 @@ public class TelaLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEntrarActionPerformed
 
     /**
-     * @param args the command line arguments
+     * param args the command line arguments
      */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

@@ -34,7 +34,7 @@ public class InvestidorController {
     /**
      * Permite abrir conexões com o banco de testes.
      *
-     * @param conexoes função que abre as conexões usadas pelo controller
+     * param conexoes função que abre as conexões usadas pelo controller
      */
     public InvestidorController(Supplier<Connection> conexoes) {
         if (conexoes == null) {
@@ -46,9 +46,9 @@ public class InvestidorController {
     /**
      * Devolve o investidor quando o CPF e a senha conferem.
      *
-     * @param cpf CPF com 11 dígitos, sem pontuação
-     * @param senha senha com seis dígitos numéricos
-     * @return investidor autenticado
+     * param cpf CPF com 11 dígitos, sem pontuação
+     * param senha senha com seis dígitos numéricos
+     * return investidor autenticado
      */
     public Investidor autenticar(String cpf, String senha) {
         Validacao.validarCpf(cpf);
@@ -67,8 +67,8 @@ public class InvestidorController {
     /**
      * Lança Senha inválida quando a confirmação não confere.
      *
-     * @param investidorId ID do investidor
-     * @param senha senha com seis dígitos numéricos
+     * param investidorId ID do investidor
+     * param senha senha com seis dígitos numéricos
      */
     public void validarSenha(long investidorId, String senha) {
         buscarComSenha(investidorId, senha);
@@ -77,9 +77,9 @@ public class InvestidorController {
     /**
      * Devolve nome, CPF e carteira com os saldos atuais do banco.
      *
-     * @param investidorId ID do investidor
-     * @param senha senha com seis dígitos numéricos
-     * @return investidor com nome, CPF e saldos atuais
+     * param investidorId ID do investidor
+     * param senha senha com seis dígitos numéricos
+     * return investidor com nome, CPF e saldos atuais
      */
     public Investidor consultarSaldo(long investidorId, String senha) {
         return buscarComSenha(investidorId, senha);
@@ -88,9 +88,9 @@ public class InvestidorController {
     /**
      * Confirma a senha e devolve as operações em ordem de data.
      *
-     * @param investidorId ID do investidor
-     * @param senha senha com seis dígitos numéricos
-     * @return operações em ordem de data
+     * param investidorId ID do investidor
+     * param senha senha com seis dígitos numéricos
+     * return operações em ordem de data
      */
     public List<Operacao> consultarExtrato(long investidorId, String senha) {
         return buscarComSenha(investidorId, senha).getCarteira().getExtrato();
@@ -99,9 +99,9 @@ public class InvestidorController {
     /**
      * Deposita reais e devolve a carteira atualizada.
      *
-     * @param investidorId ID do investidor
-     * @param valor valor em reais ou unidades da moeda indicada
-     * @return carteira atualizada
+     * param investidorId ID do investidor
+     * param valor valor em reais ou unidades da moeda indicada
+     * return carteira atualizada
      */
     public Carteira depositar(long investidorId, BigDecimal valor) {
         return movimentarReais(investidorId, valor, true);
@@ -110,9 +110,9 @@ public class InvestidorController {
     /**
      * Saca reais se houver saldo e devolve a carteira atualizada.
      *
-     * @param investidorId ID do investidor
-     * @param valor valor em reais ou unidades da moeda indicada
-     * @return carteira atualizada
+     * param investidorId ID do investidor
+     * param valor valor em reais ou unidades da moeda indicada
+     * return carteira atualizada
      */
     public Carteira sacar(long investidorId, BigDecimal valor) {
         return movimentarReais(investidorId, valor, false);

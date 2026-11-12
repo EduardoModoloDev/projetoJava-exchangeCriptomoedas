@@ -18,7 +18,7 @@ public class Real extends Moedas {
     /**
      * Atualiza a cotação com uma variação entre -5% e +5%.
      *
-     * @param random gerador da variação aleatória
+     * param random gerador da variação aleatória
      */
     @Override
     public void atualizarCotacao(Random random) {

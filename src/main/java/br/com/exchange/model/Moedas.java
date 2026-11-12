@@ -17,9 +17,9 @@ public abstract class Moedas {
     /**
      * A cotação deve ser positiva e é guardada com duas casas decimais.
      *
-     * @param nome nome da pessoa ou moeda
-     * @param sigla sigla da moeda
-     * @param cotacao cotação da moeda em reais
+     * param nome nome da pessoa ou moeda
+     * param sigla sigla da moeda
+     * param cotacao cotação da moeda em reais
      */
     protected Moedas(String nome, String sigla, BigDecimal cotacao) {
         Validacao.validarValorNaoNegativo(cotacao, "A cotação");
@@ -35,7 +35,7 @@ public abstract class Moedas {
     /**
      * Consulta o nome cadastrado.
      *
-     * @return nome cadastrado
+     * return nome cadastrado
      */
     public String getNome() {
         return nome;
@@ -44,7 +44,7 @@ public abstract class Moedas {
     /**
      * Consulta a sigla da moeda.
      *
-     * @return sigla da moeda
+     * return sigla da moeda
      */
     public String getSigla() {
         return sigla;
@@ -53,7 +53,7 @@ public abstract class Moedas {
     /**
      * Consulta a cotação em reais.
      *
-     * @return cotação em reais com duas casas decimais
+     * return cotação em reais com duas casas decimais
      */
     public BigDecimal getCotacao() {
         return cotacao;
@@ -70,7 +70,7 @@ public abstract class Moedas {
      * Sorteia uma variação entre -5% e +5%.
      * Mantém a cotação anterior se o arredondamento passar do limite.
      *
-     * @param random gerador da variação aleatória
+     * param random gerador da variação aleatória
      */
     public void atualizarCotacao(Random random) {
         if (random == null) {
@@ -94,9 +94,9 @@ public abstract class Moedas {
     /**
      * Calcula o valor da taxa em reais.
      *
-     * @param valor valor em reais ou unidades da moeda indicada
-     * @param aliquota taxa decimal, como 0.01 para 1%
-     * @return valor da taxa em reais
+     * param valor valor em reais ou unidades da moeda indicada
+     * param aliquota taxa decimal, como 0.01 para 1%
+     * return valor da taxa em reais
      */
     protected BigDecimal calcularTaxa(BigDecimal valor, BigDecimal aliquota) {
         Validacao.validarValorNaoNegativo(valor, "O valor da operação");

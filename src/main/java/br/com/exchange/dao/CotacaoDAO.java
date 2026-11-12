@@ -24,7 +24,7 @@ public class CotacaoDAO {
     /**
      * Consulta as cotações das três criptomoedas.
      *
-     * @return cotações de BTC, ETH e XRP
+     * return cotações de BTC, ETH e XRP
      */
     public List<Moedas> buscarTodas() {
         try (Connection conexao = ConnectionFactory.getConnection()) {
@@ -37,8 +37,8 @@ public class CotacaoDAO {
     /**
      * Consulta as cotações das três criptomoedas.
      *
-     * @param conexao conexão controlada por quem chamou o método
-     * @return cotações de BTC, ETH e XRP
+     * param conexao conexão controlada por quem chamou o método
+     * return cotações de BTC, ETH e XRP
      */
     public List<Moedas> buscarTodas(Connection conexao) {
         return buscar(conexao, false);
@@ -47,8 +47,8 @@ public class CotacaoDAO {
     /**
      * Mantém as três cotações reservadas até o fim da atualização.
      *
-     * @param conexao conexão controlada por quem chamou o método
-     * @return cotações bloqueadas até o fim da transação
+     * param conexao conexão controlada por quem chamou o método
+     * return cotações bloqueadas até o fim da transação
      */
     public List<Moedas> buscarParaAtualizar(Connection conexao) {
         return buscar(conexao, true);
@@ -82,8 +82,8 @@ public class CotacaoDAO {
     /**
      * Salva a cotação informada.
      *
-     * @param sigla sigla da moeda
-     * @param novoValor nova cotação em reais
+     * param sigla sigla da moeda
+     * param novoValor nova cotação em reais
      */
     public void atualizar(String sigla, BigDecimal novoValor) {
         try (Connection conexao = ConnectionFactory.getConnection()) {
@@ -96,9 +96,9 @@ public class CotacaoDAO {
     /**
      * Salva o valor recebido, sem calcular variação ou taxas.
      *
-     * @param conexao conexão controlada por quem chamou o método
-     * @param sigla sigla da moeda
-     * @param novoValor nova cotação em reais
+     * param conexao conexão controlada por quem chamou o método
+     * param sigla sigla da moeda
+     * param novoValor nova cotação em reais
      */
     public void atualizar(Connection conexao, String sigla, BigDecimal novoValor) {
         String sql = "UPDATE cotacao SET valor = ? WHERE moeda = ?";

@@ -18,8 +18,8 @@ public class CarteiraDAO {
     /**
      * Consulta a carteira do investidor.
      *
-     * @param investidorId ID do investidor
-     * @return carteira, ou null se não existir
+     * param investidorId ID do investidor
+     * return carteira, ou null se não existir
      */
     public Carteira buscarPorInvestidor(int investidorId) {
         try (Connection conexao = ConnectionFactory.getConnection()) {
@@ -32,9 +32,9 @@ public class CarteiraDAO {
     /**
      * Retorna null quando o investidor não tem carteira.
      *
-     * @param conexao conexão controlada por quem chamou o método
-     * @param investidorId ID do investidor
-     * @return carteira, ou null se não existir
+     * param conexao conexão controlada por quem chamou o método
+     * param investidorId ID do investidor
+     * return carteira, ou null se não existir
      */
     public Carteira buscarPorInvestidor(Connection conexao, int investidorId) {
         return buscar(conexao, investidorId, false);
@@ -43,9 +43,9 @@ public class CarteiraDAO {
     /**
      * Evita duas movimentações alterarem o mesmo saldo ao mesmo tempo.
      *
-     * @param conexao conexão controlada por quem chamou o método
-     * @param investidorId ID do investidor
-     * @return carteira bloqueada até o fim da transação, ou null
+     * param conexao conexão controlada por quem chamou o método
+     * param investidorId ID do investidor
+     * return carteira bloqueada até o fim da transação, ou null
      */
     public Carteira buscarParaAtualizar(Connection conexao, int investidorId) {
         return buscar(conexao, investidorId, true);
@@ -76,8 +76,8 @@ public class CarteiraDAO {
     /**
      * Salva os quatro saldos da carteira.
      *
-     * @param investidorId ID do investidor
-     * @param carteira carteira com os saldos atuais
+     * param investidorId ID do investidor
+     * param carteira carteira com os saldos atuais
      */
     public void atualizarSaldos(int investidorId, Carteira carteira) {
         try (Connection conexao = ConnectionFactory.getConnection()) {
@@ -90,9 +90,9 @@ public class CarteiraDAO {
     /**
      * A conexão recebida continua sob controle de quem chamou o método.
      *
-     * @param conexao conexão controlada por quem chamou o método
-     * @param investidorId ID do investidor
-     * @param carteira carteira com os saldos atuais
+     * param conexao conexão controlada por quem chamou o método
+     * param investidorId ID do investidor
+     * param carteira carteira com os saldos atuais
      */
     public void atualizarSaldos(Connection conexao, int investidorId, Carteira carteira) {
         String sql = "UPDATE carteira SET saldo_real = ?, saldo_bitcoin = ?, "

@@ -11,7 +11,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author edumo
+ * author edumo
  */
 public class TelaExtrato extends javax.swing.JFrame {
     

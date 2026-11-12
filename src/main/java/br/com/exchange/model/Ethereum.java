@@ -22,7 +22,7 @@ public class Ethereum extends Moedas implements Tarifacao {
     /**
      * Cria a moeda com a cotação informada.
      *
-     * @param cotacao cotação da moeda em reais
+     * param cotacao cotação da moeda em reais
      */
     public Ethereum(BigDecimal cotacao) {
         super("Ethereum", "ETH", cotacao);
@@ -31,7 +31,7 @@ public class Ethereum extends Moedas implements Tarifacao {
     /**
      * Consulta a alíquota de compra.
      *
-     * @return alíquota decimal da compra
+     * return alíquota decimal da compra
      */
     @Override
     public BigDecimal getAliquotaCompra() {
@@ -41,7 +41,7 @@ public class Ethereum extends Moedas implements Tarifacao {
     /**
      * Consulta a alíquota de venda.
      *
-     * @return alíquota decimal da venda
+     * return alíquota decimal da venda
      */
     @Override
     public BigDecimal getAliquotaVenda() {
@@ -51,8 +51,8 @@ public class Ethereum extends Moedas implements Tarifacao {
     /**
      * Calcula a taxa de compra em reais.
      *
-     * @param valor valor em reais ou unidades da moeda indicada
-     * @return valor da taxa de compra em reais
+     * param valor valor em reais ou unidades da moeda indicada
+     * return valor da taxa de compra em reais
      */
     @Override
     public BigDecimal calcularTaxaCompra(BigDecimal valor) {
@@ -62,8 +62,8 @@ public class Ethereum extends Moedas implements Tarifacao {
     /**
      * Calcula a taxa de venda em reais.
      *
-     * @param valor valor em reais ou unidades da moeda indicada
-     * @return valor da taxa de venda em reais
+     * param valor valor em reais ou unidades da moeda indicada
+     * return valor da taxa de venda em reais
      */
     @Override
     public BigDecimal calcularTaxaVenda(BigDecimal valor) {

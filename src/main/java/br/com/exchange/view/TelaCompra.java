@@ -13,7 +13,7 @@ import java.util.List;
 import javax.swing.JOptionPane;
 /**
  *
- * @author edumo
+ * author edumo
  */
 public class TelaCompra extends javax.swing.JFrame {
     

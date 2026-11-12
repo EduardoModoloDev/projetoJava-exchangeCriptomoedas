@@ -37,9 +37,9 @@ public final class CalculoNegociacao {
     /**
      * Soma a taxa ao valor pago em reais.
      *
-     * @param moeda criptomoeda usada na negociação
-     * @param valorEmReais valor da negociação em reais, antes da taxa
-     * @return cálculo da compra com taxa, total e quantidade
+     * param moeda criptomoeda usada na negociação
+     * param valorEmReais valor da negociação em reais, antes da taxa
+     * return cálculo da compra com taxa, total e quantidade
      */
     public static CalculoNegociacao compra(Moedas moeda, BigDecimal valorEmReais) {
         return new CalculoNegociacao(moeda, valorEmReais, true);
@@ -48,9 +48,9 @@ public final class CalculoNegociacao {
     /**
      * Desconta a taxa do valor recebido em reais.
      *
-     * @param moeda criptomoeda usada na negociação
-     * @param valorEmReais valor da negociação em reais, antes da taxa
-     * @return cálculo da venda com taxa, total e quantidade
+     * param moeda criptomoeda usada na negociação
+     * param valorEmReais valor da negociação em reais, antes da taxa
+     * return cálculo da venda com taxa, total e quantidade
      */
     public static CalculoNegociacao venda(Moedas moeda, BigDecimal valorEmReais) {
         return new CalculoNegociacao(moeda, valorEmReais, false);
@@ -59,7 +59,7 @@ public final class CalculoNegociacao {
     /**
      * Consulta o valor da operação em reais.
      *
-     * @return valor em reais antes da taxa
+     * return valor em reais antes da taxa
      */
     public BigDecimal getValor() {
         return valor;
@@ -68,7 +68,7 @@ public final class CalculoNegociacao {
     /**
      * Consulta o valor da taxa.
      *
-     * @return valor da taxa em reais
+     * return valor da taxa em reais
      */
     public BigDecimal getValorTaxa() {
         return valorTaxa;
@@ -77,7 +77,7 @@ public final class CalculoNegociacao {
     /**
      * Consulta o valor total movimentado em reais.
      *
-     * @return valor total debitado na compra ou creditado na venda
+     * return valor total debitado na compra ou creditado na venda
      */
     public BigDecimal getTotalEmReais() {
         return totalEmReais;
@@ -86,7 +86,7 @@ public final class CalculoNegociacao {
     /**
      * Consulta a quantidade de criptomoeda negociada.
      *
-     * @return quantidade de criptomoeda com oito casas decimais
+     * return quantidade de criptomoeda com oito casas decimais
      */
     public BigDecimal getQuantidade() {
         return quantidade;
@@ -95,7 +95,7 @@ public final class CalculoNegociacao {
     /**
      * Consulta a taxa decimal usada no cálculo.
      *
-     * @return alíquota decimal usada no cálculo
+     * return alíquota decimal usada no cálculo
      */
     public BigDecimal getAliquota() {
         return aliquota;

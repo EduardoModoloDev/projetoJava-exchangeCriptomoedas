@@ -21,8 +21,8 @@ public class InvestidorDAO {
     /**
      * Salva o investidor e sua carteira juntos e retorna o ID criado.
      *
-     * @param investidor investidor a salvar
-     * @return ID criado pelo banco
+     * param investidor investidor a salvar
+     * return ID criado pelo banco
      */
     public int inserir(Investidor investidor) {
         try (Connection conexao = ConnectionFactory.getConnection()) {
@@ -47,9 +47,9 @@ public class InvestidorDAO {
     /**
      * Quem fornece a conexão controla o commit e o rollback.
      *
-     * @param conexao conexão controlada por quem chamou o método
-     * @param investidor investidor a salvar
-     * @return ID criado pelo banco
+     * param conexao conexão controlada por quem chamou o método
+     * param investidor investidor a salvar
+     * return ID criado pelo banco
      */
     public int inserir(Connection conexao, Investidor investidor) {
         String sql = "INSERT INTO investidor (nome, cpf, senha) VALUES (?, ?, ?)";
@@ -88,8 +88,8 @@ public class InvestidorDAO {
     /**
      * Consulta o investidor pelo CPF.
      *
-     * @param cpf CPF com 11 dígitos, sem pontuação
-     * @return investidor completo, ou null se não existir
+     * param cpf CPF com 11 dígitos, sem pontuação
+     * return investidor completo, ou null se não existir
      */
     public Investidor buscarPorCpf(String cpf) {
         try (Connection conexao = ConnectionFactory.getConnection()) {
@@ -102,9 +102,9 @@ public class InvestidorDAO {
     /**
      * Carrega também os saldos e o extrato. Retorna null se o CPF não existir.
      *
-     * @param conexao conexão controlada por quem chamou o método
-     * @param cpf CPF com 11 dígitos, sem pontuação
-     * @return investidor completo, ou null se não existir
+     * param conexao conexão controlada por quem chamou o método
+     * param cpf CPF com 11 dígitos, sem pontuação
+     * return investidor completo, ou null se não existir
      */
     public Investidor buscarPorCpf(Connection conexao, String cpf) {
         String sql = "SELECT id, nome, cpf, senha FROM investidor WHERE cpf = ?";
@@ -121,9 +121,9 @@ public class InvestidorDAO {
     /**
      * Consulta pelo ID usando a conexão de quem chamou.
      *
-     * @param conexao conexão controlada por quem chamou o método
-     * @param id ID do investidor
-     * @return investidor completo, ou null se não existir
+     * param conexao conexão controlada por quem chamou o método
+     * param id ID do investidor
+     * return investidor completo, ou null se não existir
      */
     public Investidor buscarPorId(Connection conexao, int id) {
         String sql = "SELECT id, nome, cpf, senha FROM investidor WHERE id = ?";

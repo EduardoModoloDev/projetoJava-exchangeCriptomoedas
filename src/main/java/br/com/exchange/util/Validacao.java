@@ -14,7 +14,7 @@ public final class Validacao {
     /**
      * Confere os 11 números do CPF, sem calcular os dígitos verificadores.
      *
-     * @param cpf CPF com 11 dígitos, sem pontuação
+     * param cpf CPF com 11 dígitos, sem pontuação
      */
     public static void validarCpf(String cpf) {
         if (cpf == null || cpf.length() != 11 || !somenteNumeros(cpf)) {
@@ -25,7 +25,7 @@ public final class Validacao {
     /**
      * A senha deve ter 6 números.
      *
-     * @param senha senha com seis dígitos numéricos
+     * param senha senha com seis dígitos numéricos
      */
     public static void validarSenha(String senha) {
         if (senha == null || senha.length() != 6 || !somenteNumeros(senha)) {
@@ -36,8 +36,8 @@ public final class Validacao {
     /**
      * O valor deve ser informado e não pode ser negativo.
      *
-     * @param valor valor em reais ou unidades da moeda indicada
-     * @param campo nome do campo usado na mensagem de validação
+     * param valor valor em reais ou unidades da moeda indicada
+     * param campo nome do campo usado na mensagem de validação
      */
     public static void validarValorNaoNegativo(BigDecimal valor, String campo) {
         if (valor == null || valor.signum() < 0) {
@@ -48,8 +48,8 @@ public final class Validacao {
     /**
      * Confere o ID antes de usar o tipo INTEGER do banco.
      *
-     * @param id ID do investidor
-     * @return ID convertido para o tipo INTEGER do banco
+     * param id ID do investidor
+     * return ID convertido para o tipo INTEGER do banco
      */
     public static int validarInvestidorId(long id) {
         if (id <= 0 || id > Integer.MAX_VALUE) {
@@ -61,8 +61,8 @@ public final class Validacao {
     /**
      * Ajusta o valor em reais para centavos.
      *
-     * @param valor valor em reais ou unidades da moeda indicada
-     * @return valor em reais arredondado para centavos
+     * param valor valor em reais ou unidades da moeda indicada
+     * return valor em reais arredondado para centavos
      */
     public static BigDecimal validarValorPositivo(BigDecimal valor) {
         if (valor == null || valor.signum() <= 0) {

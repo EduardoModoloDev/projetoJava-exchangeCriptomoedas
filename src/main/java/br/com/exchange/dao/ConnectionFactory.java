@@ -20,7 +20,7 @@ public final class ConnectionFactory {
     /**
      * Abre a conexão usando a configuração externa ou a configuração local do NetBeans.
      *
-     * @return conexão aberta com o PostgreSQL
+     * return conexão aberta com o PostgreSQL
      */
     public static Connection getConnection() {
         Properties configuracao = new Properties();

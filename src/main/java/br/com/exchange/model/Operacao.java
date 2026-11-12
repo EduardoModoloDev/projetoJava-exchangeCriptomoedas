@@ -28,13 +28,13 @@ public final class Operacao {
      * Guarda os saldos da carteira após a operação.
      * O valor é em reais. A taxa é decimal: 0.01 = 1%.
      *
-     * @param dataHora data e hora da operação
-     * @param sinal sinal de entrada ou saída de reais, + ou -
-     * @param valor valor em reais ou unidades da moeda indicada
-     * @param siglaMoeda sigla da criptomoeda
-     * @param cotacao cotação da moeda em reais
-     * @param taxa taxa decimal aplicada
-     * @param carteira carteira com os saldos atuais
+     * param dataHora data e hora da operação
+     * param sinal sinal de entrada ou saída de reais, + ou -
+     * param valor valor em reais ou unidades da moeda indicada
+     * param siglaMoeda sigla da criptomoeda
+     * param cotacao cotação da moeda em reais
+     * param taxa taxa decimal aplicada
+     * param carteira carteira com os saldos atuais
      */
     public Operacao(LocalDateTime dataHora, char sinal, BigDecimal valor,
                     String siglaMoeda, BigDecimal cotacao, BigDecimal taxa, Carteira carteira) {
@@ -70,7 +70,7 @@ public final class Operacao {
     /**
      * Consulta a data e a hora da operação.
      *
-     * @return data e hora registradas
+     * return data e hora registradas
      */
     public LocalDateTime getDataHora() {
         return dataHora;
@@ -79,7 +79,7 @@ public final class Operacao {
     /**
      * Consulta o sinal da operação.
      *
-     * @return sinal registrado, + ou -
+     * return sinal registrado, + ou -
      */
     public char getSinal() {
         return sinal;
@@ -88,7 +88,7 @@ public final class Operacao {
     /**
      * Consulta o valor da operação em reais.
      *
-     * @return valor em reais antes da taxa
+     * return valor em reais antes da taxa
      */
     public BigDecimal getValor() {
         return valor;
@@ -97,7 +97,7 @@ public final class Operacao {
     /**
      * Consulta a moeda da operação.
      *
-     * @return sigla da moeda da operação
+     * return sigla da moeda da operação
      */
     public String getSiglaMoeda() {
         return siglaMoeda;
@@ -106,7 +106,7 @@ public final class Operacao {
     /**
      * Consulta a cotação em reais.
      *
-     * @return cotação em reais com duas casas decimais
+     * return cotação em reais com duas casas decimais
      */
     public BigDecimal getCotacao() {
         return cotacao;
@@ -115,7 +115,7 @@ public final class Operacao {
     /**
      * Consulta a taxa decimal da operação.
      *
-     * @return alíquota decimal registrada
+     * return alíquota decimal registrada
      */
     public BigDecimal getTaxa() {
         return taxa;
@@ -124,7 +124,7 @@ public final class Operacao {
     /**
      * Consulta o saldo em reais.
      *
-     * @return saldo em reais com duas casas decimais
+     * return saldo em reais com duas casas decimais
      */
     public BigDecimal getSaldoReais() {
         return saldoReais;
@@ -133,7 +133,7 @@ public final class Operacao {
     /**
      * Consulta o saldo em Bitcoin.
      *
-     * @return saldo em Bitcoin com oito casas decimais
+     * return saldo em Bitcoin com oito casas decimais
      */
     public BigDecimal getSaldoBitcoin() {
         return saldoBitcoin;
@@ -142,7 +142,7 @@ public final class Operacao {
     /**
      * Consulta o saldo em Ethereum.
      *
-     * @return saldo em Ethereum com oito casas decimais
+     * return saldo em Ethereum com oito casas decimais
      */
     public BigDecimal getSaldoEthereum() {
         return saldoEthereum;
@@ -151,7 +151,7 @@ public final class Operacao {
     /**
      * Consulta o saldo em Ripple.
      *
-     * @return saldo em Ripple com oito casas decimais
+     * return saldo em Ripple com oito casas decimais
      */
     public BigDecimal getSaldoRipple() {
         return saldoRipple;
@@ -160,7 +160,7 @@ public final class Operacao {
     /**
      * Formata os dados da operação em uma linha do extrato.
      *
-     * @return linha formatada do extrato
+     * return linha formatada do extrato
      */
     @Override
     public String toString() {

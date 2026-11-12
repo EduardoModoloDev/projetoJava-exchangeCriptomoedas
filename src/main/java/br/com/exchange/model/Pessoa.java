@@ -14,9 +14,9 @@ public abstract class Pessoa {
     /**
      * Cria os dados de Pessoa.
      *
-     * @param nome nome da pessoa ou moeda
-     * @param cpf CPF com 11 dígitos, sem pontuação
-     * @param senha senha com seis dígitos numéricos
+     * param nome nome da pessoa ou moeda
+     * param cpf CPF com 11 dígitos, sem pontuação
+     * param senha senha com seis dígitos numéricos
      */
     protected Pessoa(String nome, String cpf, String senha) {
         setNome(nome);
@@ -27,7 +27,7 @@ public abstract class Pessoa {
     /**
      * Consulta o nome cadastrado.
      *
-     * @return nome cadastrado
+     * return nome cadastrado
      */
     public String getNome() {
         return nome;
@@ -36,7 +36,7 @@ public abstract class Pessoa {
     /**
      * Altera o nome após a validação.
      *
-     * @param nome nome da pessoa ou moeda
+     * param nome nome da pessoa ou moeda
      */
     public void setNome(String nome) {
         if (nome == null || nome.isBlank()) {
@@ -48,7 +48,7 @@ public abstract class Pessoa {
     /**
      * Consulta o CPF cadastrado.
      *
-     * @return CPF cadastrado
+     * return CPF cadastrado
      */
     public String getCpf() {
         return cpf;
@@ -57,7 +57,7 @@ public abstract class Pessoa {
     /**
      * Altera o CPF após a validação.
      *
-     * @param cpf CPF com 11 dígitos, sem pontuação
+     * param cpf CPF com 11 dígitos, sem pontuação
      */
     public void setCpf(String cpf) {
         Validacao.validarCpf(cpf);
@@ -67,7 +67,7 @@ public abstract class Pessoa {
     /**
      * Consulta a senha do investidor.
      *
-     * @return senha do investidor
+     * return senha do investidor
      */
     public String getSenha() {
         return senha;
@@ -76,7 +76,7 @@ public abstract class Pessoa {
     /**
      * Altera a senha após a validação.
      *
-     * @param senha senha com seis dígitos numéricos
+     * param senha senha com seis dígitos numéricos
      */
     public void setSenha(String senha) {
         Validacao.validarSenha(senha);

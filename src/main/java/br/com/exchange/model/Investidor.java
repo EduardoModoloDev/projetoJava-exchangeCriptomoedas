@@ -11,9 +11,9 @@ public class Investidor extends Pessoa {
     /**
      * Cria o investidor com a carteira zerada.
      *
-     * @param nome nome da pessoa ou moeda
-     * @param cpf CPF com 11 dígitos, sem pontuação
-     * @param senha senha com seis dígitos numéricos
+     * param nome nome da pessoa ou moeda
+     * param cpf CPF com 11 dígitos, sem pontuação
+     * param senha senha com seis dígitos numéricos
      */
     public Investidor(String nome, String cpf, String senha) {
         this(0, nome, cpf, senha, new Carteira());
@@ -22,11 +22,11 @@ public class Investidor extends Pessoa {
     /**
      * Carrega os dados do investidor que já existe no banco.
      *
-     * @param id ID do investidor
-     * @param nome nome da pessoa ou moeda
-     * @param cpf CPF com 11 dígitos, sem pontuação
-     * @param senha senha com seis dígitos numéricos
-     * @param carteira carteira com os saldos atuais
+     * param id ID do investidor
+     * param nome nome da pessoa ou moeda
+     * param cpf CPF com 11 dígitos, sem pontuação
+     * param senha senha com seis dígitos numéricos
+     * param carteira carteira com os saldos atuais
      */
     public Investidor(int id, String nome, String cpf, String senha, Carteira carteira) {
         super(nome, cpf, senha);
@@ -40,7 +40,7 @@ public class Investidor extends Pessoa {
     /**
      * Consulta o ID do investidor.
      *
-     * @return ID do investidor, ou zero antes de ser salvo
+     * return ID do investidor, ou zero antes de ser salvo
      */
     public int getId() {
         return id;
@@ -49,7 +49,7 @@ public class Investidor extends Pessoa {
     /**
      * Consulta a carteira do investidor.
      *
-     * @return carteira do investidor
+     * return carteira do investidor
      */
     public Carteira getCarteira() {
         return carteira;
@@ -58,8 +58,8 @@ public class Investidor extends Pessoa {
     /**
      * Confere a senha do investidor.
      *
-     * @param senhaInformada senha a conferir
-     * @return true quando a senha confere
+     * param senhaInformada senha a conferir
+     * return true quando a senha confere
      */
     public boolean verificarSenha(String senhaInformada) {
         return getSenha().equals(senhaInformada);
